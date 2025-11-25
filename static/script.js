@@ -1,3 +1,4 @@
+
 function sendMessage() {
     const message = document.getElementById("message").value.trim();
     if (!message) return;

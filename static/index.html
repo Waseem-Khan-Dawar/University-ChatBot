@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>University Merit Chatbot</title>
+    <title>ECC Chatbot</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -58,36 +58,83 @@
         .input-area {
             display: flex;
             border-top: 1px solid #ccc;
+            align-items: center;
+            padding: 10px;
         }
         .input-area input {
             flex: 1;
             padding: 10px;
             border: none;
             outline: none;
+            font-size: 14px;
+            border-radius: 8px;
+            background: #f9fafb;
+        }
+        .input-area input:focus {
+            border: 2px solid #2575fc;
         }
         .input-area button {
+            position: relative;
+            width: 44px;
+            height: 44px;
+            margin: 0 8px;
             background: #2575fc;
             color: white;
             border: none;
-            padding: 10px 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         .input-area button:hover {
             background: #1e5ed9;
+        }
+        .input-area button svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+        .input-area button .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: ripple 0.6s ease-out;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes ripple {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="chat-container">
-        <div class="header">EduNavigator</div>
+        <div class="header">ECC ChatBot</div>
         <div id="chatbox"></div>
         <div class="input-area">
             <input type="text" id="message" placeholder="Ask something..." onkeypress="if(event.key==='Enter')sendMessage()">
-            <button onclick="sendMessage()">Send</button>
+            <button onclick="sendMessage()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M2 21l21-9-21-9v7l15 2-15 2v7z"/>
+                </svg>
+            </button>
         </div>
     </div>
 
@@ -132,6 +179,25 @@
                 setTimeout(() => updateMessage(typingId, "⚠️ Error connecting to server."), 500);
             });
         }
+    </script>
+    <!-- Inline script for welcome message -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const chatbox = document.getElementById("chatbox");
+            if (chatbox.children.length === 0) {
+                appendMessage("bot", "Hi! How can I help you today?");
+            }
+        });
+    </script>
+    <!-- Inline script for ripple effect -->
+    <script>
+        document.querySelector(".input-area button").addEventListener("click", (event) => {
+            const button = event.currentTarget;
+            const ripple = document.createElement("span");
+            ripple.classList.add("ripple");
+            button.appendChild(ripple);
+            ripple.addEventListener("animationend", () => ripple.remove());
+        });
     </script>
 </body>
 </html>
