@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-# 🎓 EduNavigator - University Merit Chatbot
+
+# 🎓 UniversityChatbot
 
 A Python-based chatbot that provides university program details, merit requirements, and admission timelines for students.
 
@@ -33,5 +33,3 @@ A Python-based chatbot that provides university program details, merit requireme
  ```bash
   python app.py
 =======
-# University-ChatBot
->>>>>>> 3f10f28e4b85456a78e7a3fcebaa30d2e8e6b3c4
